@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernandez Cineplay - Galería</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .modal input, .modal button {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+        }
+
+        .modal button {
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fernandez Cineplay</h1>
+        <nav>
+            <table>
+                <tr>
+                    <td><a href="index.html">Inicio</a></td>
+                    <td><a href="galeria.html">Galería</a></td>
+                    <td><a href="habitaciones.html">Habitaciones</a></td>
+                    <td><a href="servicios.html">Servicios</a></td>
+                </tr>
+            </table>
+        </nav>
+        <p>¡Vive la magia del cine con nosotros!</p>
+    </header>
+
+    <main>
+        <section class="galeria">
+            <h2>Galería de Imágenes</h2>
+            <div class="imagenes">
+                <div class="imagen">
+                    <img src="sala1.png" alt="Sala 1">
+                    <p>5:00 pm , 8:00 pm . 11:00 pm</p>
+                    <button class="reservar-btn" data-imagen="sala1.png">Reservar</button>
+                </div>
+                <div class="imagen">
+                    <img src="sala2.png" alt="Sala 2">
+                    <p>5:00 pm , 8:00 pm . 11:00 pm</p>
+                    <button class="reservar-btn" data-imagen="sala2.png">Reservar</button>
+                </div>
+                <div class="imagen">
+                    <img src="sala3.png" alt="Sala 3">
+                    <p>5:00 pm , 8:00 pm . 11:00 pm</p>
+                    <button class="reservar-btn" data-imagen="sala3.png">Reservar</button>
+                </div>
+                <div class="imagen">
+                    <img src="sala4.png" alt="Sala 4">
+                    <p>5:00 pm , 8:00 pm . 11:00 pm</p>
+                    <button class="reservar-btn" data-imagen="sala4.png">Reservar</button>
+                </div>
+                <div class="imagen">
+                    <img src="sala5.png" alt="Sala 5">
+                    <p>5:00 pm , 8:00 pm . 11:00 pm</p>
+                    <button class="reservar-btn" data-imagen="sala5.png">Reservar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal para el formulario de compra -->
+        <div class="overlay" id="overlay">
+            <div class="modal">
+                <h3>Reservar Sala</h3>
+                <img src="" alt="Imagen seleccionada" id="modal-img">
+                <form id="reserva-form">
+                    <input type="text" placeholder="Nombre" required>
+                    <input type="text" placeholder="DNI" required>
+                    <input type="number" placeholder="Cantidad de boletos" required>
+                    <button type="submit">Pagar</button>
+                    <button type="button" onclick="cerrarModal()">Cancelar</button>
+                </form>
+                <p id="resultado"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Contacto: info@fernandezcineplay.com</p>
+            <p>Síguenos en nuestras redes sociales:</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        const reservarButtons = document.querySelectorAll('.reservar-btn');
+        const overlay = document.getElementById('overlay');
+        const modalImg = document.getElementById('modal-img');
+        const reservaForm = document.getElementById('reserva-form');
+        const resultado = document.getElementById('resultado');
+
+        reservarButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const imagen = button.getAttribute('data-imagen');
+                modalImg.src = imagen;
+                overlay.style.display = 'flex';
+            });
+        });
+
+        reservaForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nombre = reservaForm.querySelector('input[type="text"]').value;
+            const dni = reservaForm.querySelector('input[type="text"]').value;
+            const cantidadBoletos = reservaForm.querySelector('input[type="number"]').value;
+            if (nombre && dni && cantidadBoletos) {
+                // Simular una compra exitosa (aquí deberías incluir la lógica real)
+                resultado.textContent = '¡Compra exitosa!';
+            } else {
+                resultado.textContent = 'Por favor completa todos los campos.';
+            }
+        });
+
+        function cerrarModal() {
+            overlay.style.display = 'none';
+            reservaForm.reset();
+            resultado.textContent = '';
+        }
+    </script>
+</body>
+</html>
